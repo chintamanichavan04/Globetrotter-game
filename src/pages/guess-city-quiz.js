@@ -97,7 +97,7 @@ export default Index;
 
 export async function getServerSideProps() {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_SITE_URL}/api/destination`
+      `https://globetrotter-game-iota.vercel.app/api/destination`
     );
     const data = await res.json();
   
