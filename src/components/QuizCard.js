@@ -42,7 +42,8 @@ const QuizCard = ({questionData, index, answered}) => {
       };
 
     return(
-        <div className="p-6 text-center">
+        <>
+        {questionData?.question!=undefined&&<div className="p-6 text-center">
         <div className="text-[#FF0000] text-left font-extrabold text-[20px]">
             {`Quiz Number: ${index+1}/10`}
         </div>
@@ -72,7 +73,8 @@ const QuizCard = ({questionData, index, answered}) => {
             </div>
         </div>}
         
-      </div>
+      </div>}
+        </>
     );
 };
 
