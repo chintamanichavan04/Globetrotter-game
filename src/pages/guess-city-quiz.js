@@ -1,17 +1,36 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import QuizCard from "../components/QuizCard";
 import { useRouter } from "next/navigation";
 import { FiShare2 } from "react-icons/fi";
 
-const Index = ({questionList}) => {
+const Index = () => {
     const [quizIndex, SetQuizIndex] = useState(0);
     const router = useRouter();
     const [totalCorrect, SetTotalCorrect] = useState(0);
+    const [questionList, setQuestionList] = useState([]);
     const [submit, setSubmit] = useState(false);
 
     const totalCorrectAnswered = () => {
             SetTotalCorrect(totalCorrect+1);
     };
+    useEffect(() => {
+        if(sessionStorage.getItem("username")?.length>0){
+            const fetchQuestions = async () => {
+              try {
+                const res = await fetch("/api/destination");
+                const data = await res.json();
+                setQuestionList(data?.questions || []);
+              } catch (error) {
+                console.error("Error fetching questions:", error);
+              } 
+            };
+        
+            fetchQuestions();
+        }
+        else{
+            router.push("/")
+        }
+      }, []);
     const handleShare = () => {
         if (navigator.share) {
           navigator.share({
@@ -94,16 +113,3 @@ const Index = ({questionList}) => {
 };
 
 export default Index;
-
-export async function getServerSideProps() {
-    const res = await fetch(
-      `https://globetrotter-game-iota.vercel.app/api/destination`
-    );
-    const data = await res.json();
-  
-    return {
-      props: {
-        questionList: data?.questions,
-      },
-    };
-  }
