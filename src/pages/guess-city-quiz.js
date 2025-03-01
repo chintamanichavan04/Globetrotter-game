@@ -9,12 +9,12 @@ const Index = () => {
     const [totalCorrect, SetTotalCorrect] = useState(0);
     const [questionList, setQuestionList] = useState([]);
     const [submit, setSubmit] = useState(false);
-
+    const [userName, setUserName] = useState("");
     const totalCorrectAnswered = () => {
             SetTotalCorrect(totalCorrect+1);
     };
     useEffect(() => {
-        if(sessionStorage.getItem("username")?.length>0){
+        
             const fetchQuestions = async () => {
               try {
                 const res = await fetch("/api/destination");
@@ -26,10 +26,7 @@ const Index = () => {
             };
         
             fetchQuestions();
-        }
-        else{
-            router.push("/")
-        }
+
       }, []);
     const handleShare = () => {
         if (navigator.share) {
@@ -45,6 +42,16 @@ const Index = () => {
           alert('Share feature is not supported in your browser. Please copy the URL manually.');
         }
       };
+      useEffect(() => {
+        // Ensure window object is available
+        if (typeof window !== "undefined") {
+          const name = sessionStorage.getItem("username");
+          if(name?.length==0){
+            router.push("/");
+          }
+          setUserName(name);
+        }
+      }, []);
     return(
         <>
         <div className=" bg-[#0D121C] py-4 px-5 text-2xl flex items-center justify-between">
@@ -53,12 +60,12 @@ const Index = () => {
             </div>
             <div className="flex items-center ml-2">
                 <div className="hidden md:block">
-                {sessionStorage.getItem("username")}
+                {userName}
                 </div>
                 <img
                     src="/images/user.png"
                     className="h-10 rounded-full ml-4"
-                    title={sessionStorage.getItem("username")}
+                    title={userName}
                 />
             </div>
         </div>
