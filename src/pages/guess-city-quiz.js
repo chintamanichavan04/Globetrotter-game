@@ -69,7 +69,7 @@ const Index = () => {
                 />
             </div>
         </div>
-        <div className="h-full w-full flex flex-col items-center justify-center">{console.log("correct",totalCorrect)}
+       {questionList?.length>0&& <div className="h-full w-full flex flex-col items-center justify-center">{console.log("correct",totalCorrect)}
         <div className="bg-[#FFFFFF] md:w-[70%] w-[100%] h-fit rounded-2xl p-5 overflow-hidden">
             {submit?<div className="flex flex-col items-center justify-center text-black">
 
@@ -114,7 +114,7 @@ const Index = () => {
       </button>}
             </div>}
         </div>
-      </div>
+      </div>}
         </>
     );
 };
