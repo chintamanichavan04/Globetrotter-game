@@ -6,9 +6,7 @@ Globetrotter is a fun travel guessing game where users get cryptic clues about a
 ## 🚀 Features
 - **Random Destination Selection**: Fetches 10 unique city-based questions.
 - **Multiple Choice Answers**: Users select the right city from four options.
-- **Server-Side & Client-Side Rendering**: Efficient data fetching.
 - **Answer Verification API**: Validates user responses.
-- **Session-Based Data Caching**: Reduces redundant API calls.
 - **Optimized JSON Storage**: Key-value format for fast lookups.
 
 ---
@@ -17,12 +15,15 @@ Globetrotter is a fun travel guessing game where users get cryptic clues about a
 ```
 /globetrotter
 ├── public/                  # Static assets (e.g., images)
+├── components/              # Next.js components
+|   ├── QuizCard.js          # Main Quiz Card
 ├── pages/                   # Next.js pages
 │   ├── api/                 # API routes
 │   │   ├── destination.js   # Fetches 10 random questions
 │   │   ├── verify.js        # Validates user answers
-│   ├── game.js              # Game UI with question handling
-├── data/                    # Local data store (JSON-based)
+│   ├── index.js             # Main Page (user login)
+|   ├── guess-city-quiz.js   # Game Page
+├── data/                    # Local data store (3JSON-based)
 │   ├── unique_cities.json   # Key-value JSON dataset
 ├── components/              # Reusable components
 ├── styles/                  # Global and component styles
